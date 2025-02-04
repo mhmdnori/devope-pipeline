@@ -4,21 +4,21 @@ pipeline {
         stage('Build') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
-                    sh "$PWD/scripts/build.sh"
+                    sh "scripts/build.sh"
                 }
             }
         }
         stage('Test') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
-                    sh "$PWD/scripts/test.sh"
+                    sh "scripts/test.sh"
                 }
             }
         }
         stage('Deploy') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
-                    sh "$PWD/scripts/deploy.sh"
+                    sh "scripts/deploy.sh"
                 }
             }
         }
