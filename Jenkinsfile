@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
-                    sh "scripts/build.sh"
+                    sh "$PWD/scripts/build.sh"
                 }
             }
         }
