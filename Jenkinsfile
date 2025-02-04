@@ -1,19 +1,25 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('Build'){
+    stages {
+        stage('Build') {
             steps {
-                sh "$PWD/scripts/build.sh"
+                catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
+                    sh "$PWD/scripts/build.sh"
+                }
             }
         }
-        stage('test'){
+        stage('Test') {
             steps {
-                sh "$PWD/scripts/test.sh"
+                catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
+                    sh "$PWD/scripts/test.sh"
+                }
             }
         }
-        stage('deploy'){
+        stage('Deploy') {
             steps {
-                sh "$PWD/scripts/deploy.sh"
+                catchError(buildResult: 'FAILURE', stageResult: 'SUCCESS') {
+                    sh "$PWD/scripts/deploy.sh"
+                }
             }
         }
     }
