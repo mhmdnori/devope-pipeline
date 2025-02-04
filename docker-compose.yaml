@@ -1,0 +1,30 @@
+services: 
+  website:
+    build: 
+      context: .
+    ports: 
+      - 80:80
+    volumes:
+      - .:/app
+  
+  unit-test:
+    build:
+      context: .
+      dockerfile: rspec.Dockerfile
+    volumes:
+      - .:/app
+    command:
+      - --pattern
+      - /app/rspec/unit-test/*-spec.rb
+  jenkins:
+    build: 
+      context: .
+      dockerfile: jenkins.Dockerfile
+    volumes:
+      - .:/app
+      - /tmp/jenkins_home:/var/jenkins_home
+    ports:
+      - "8080:8080"
+    user: jenkins
+  
+
